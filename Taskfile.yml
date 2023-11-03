@@ -1,0 +1,68 @@
+version: 3
+
+# Import Environment Variables
+dotenv: [.env]
+
+tasks:
+  env:
+    desc: Downloads the nonprod .env file from Doppler.
+    aliases: [e]
+    cmd: doppler secrets download --no-file --format docker -p bunysia -c nonprod > .env
+
+  env:prod:
+    desc: Downloads the prod .env file from Doppler.
+    aliases: [ep]
+    cmd: doppler secrets download --no-file --format docker -p bunysia -c prod > prod.env
+
+  pretty:
+    desc: Uses the Prettier CLI tool to format the codebase.
+    aliases: [p, format, fmt]
+    cmd: prettier --write .
+
+  build:
+    desc: Builds the project into a Docker image for use on the local architecture.
+    aliases: [b]
+    cmd: docker build -t ${DOCKER_IMAGE} .
+
+  clean:
+    desc: Deletes the built Docker image and container.
+    aliases: [c]
+    cmd: docker rm ${DOCKER_CONTAINER_NAME}
+
+  start:
+    desc: Starts the project locally in a Docker container.
+    aliases: [s, up]
+    cmd: docker run -d -p ${APP_PORT}:${APP_PORT} --env-file=.env --name ${DOCKER_CONTAINER_NAME} ${DOCKER_IMAGE}
+
+  stop:
+    desc: Stops the locally running Docker container.
+    aliases: [st, down]
+    cmd: docker stop ${DOCKER_CONTAINER_NAME}
+
+  logs:
+    desc: Tails the logs of the locally running Docker container.
+    aliases: [l]
+    cmd: docker logs -f ${DOCKER_CONTAINER_NAME}
+
+  restart:
+    desc: Rebuilds, stops, deletes, and starts the locally running Docker container.
+    aliases: [r, reboot]
+    cmds:
+      - task build
+      - task stop
+      - task clean
+      - task start
+
+  release:
+    desc: |
+      Builds the project into a Docker image for use on amd64 & arm64 architectures, tags it with
+      latest, and pushes it to Docker Hub.
+    aliases: [rls, rel]
+    cmd: docker buildx build --platform linux/amd64,linux/arm64 -t ${DOCKER_IMAGE} --push .
+
+  push:
+    desc: Push any git changes and tags to the remote repository.
+    aliases: [gp]
+    cmds:
+      - git push
+      - git push --tags

@@ -1,15 +1,64 @@
 {
-  "name": "bunysia",
-  "version": "1.0.50",
+  "name": "@4lch4/bunysia",
+  "displayName": "Bunysia",
+  "version": "0.0.0",
+  "description": "A demo of Bun and Elysia.",
+  "keywords": [
+    "4lch4",
+    "bun",
+    "bun-sh",
+    "elysia",
+    "elysiajs"
+  ],
+  "homepage": "https://github.com/4lch4/Bunysia",
+  "bugs": {
+    "url": "https://github.com/4lch4/Bunysia/issues",
+    "email": "bugs@4lch4.email"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/4lch4/Bunysia.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "4lch4",
+    "email": "hey@4lch4.email",
+    "url": "https://4lch4.com"
+  },
+  "type": "module",
+  "exports": "./src/index.ts",
+  "main": "./src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "lint": "prettier -c .",
+    "pretty": "prettier --write .",
+    "start": "bun run src/index.ts",
+    "test": "bun test"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@4lch4/backpack": "^1.0.1",
+    "@elysiajs/cron": "^0.7.0",
+    "@elysiajs/swagger": "^0.7.4",
+    "@grotto/logysia": "^0.0.5",
+    "@sinclair/typebox": "^0.31.22",
+    "@upstash/redis": "^1.24.3",
+    "axios": "^1.6.0",
+    "elysia": "^0.7.21",
+    "p-queue": "^7.4.1",
+    "picocolors": "^1.0.0",
+    "promise-retry": "^2.0.1"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/node": "^20.8.10",
+    "@types/promise-retry": "^1.1.5",
+    "bun-types": "^1.0.8",
+    "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "prettier-plugin-packagejson": "^2.4.6",
+    "tsc-alias": "^1.8.8",
+    "typescript": "^5.2.2"
   },
-  "module": "src/index.js"
+  "engines": {
+    "node": ">=20"
+  }
 }

@@ -26,6 +26,7 @@ This demo also shows how to use the following dependencies:
 
 - Bun
 - Elysia
+- Doppler
 - Upstash
 - Redis
 - Prettier

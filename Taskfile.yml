@@ -32,7 +32,7 @@ tasks:
   start:
     desc: Starts the project locally in a Docker container.
     aliases: [s, up]
-    cmd: docker run -d -p ${APP_PORT}:${APP_PORT} --env-file=.env --name ${DOCKER_CONTAINER_NAME} ${DOCKER_IMAGE}
+    cmd: docker run -d -p ${DOCKER_CONTAINER_PORT}:${APP_PORT} --env-file=.env --name ${DOCKER_CONTAINER_NAME} ${DOCKER_IMAGE}
 
   stop:
     desc: Stops the locally running Docker container.

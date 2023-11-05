@@ -12,7 +12,7 @@ tasks:
   env:prod:
     desc: Downloads the prod .env file from Doppler.
     aliases: [ep]
-    cmd: doppler secrets download --no-file --format docker -p bunysia -c prod > prod.env
+    cmd: doppler secrets download --no-file --format docker -p bunysia -c prod > .env
 
   pretty:
     desc: Uses the Prettier CLI tool to format the codebase.
